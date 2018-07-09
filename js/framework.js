@@ -208,13 +208,6 @@ FrameworkJS.prototype.init = function () {
     this.canvasSize();
     this.canvasPaint();
 
-    // init when do action
-    // const ctx = this.ctx;
-    // if (ctx._anim_ind < ctx._anim_arr.length)
-    //     ctx._anim_arr[ctx._anim_ind].init();
-
-    // this.ctx._anim_arr.forEach(a=>a.init());
-
 };
 
 FrameworkJS.prototype.refresh = function () {
@@ -240,7 +233,7 @@ FrameworkJS.prototype.drawLoop = function () {
 
 };
 
-FrameworkJS.prototype.autoPlay = function () {
+FrameworkJS.prototype.autoPlay = function (callback) {
 
     this.auto_playing = true;
     this.stopped = false;
@@ -249,12 +242,15 @@ FrameworkJS.prototype.autoPlay = function () {
     this.last_auto = curr_auto;
 
     const machine = [
-        1000,
-        2000, 2000, 2000, 2000, 2000,
-        2000, 2000, 2000, 2000, 2000,
-        2000, 2000, 2000, 2000, 2000,
-        3500, 3500, 3500, 3500, 3500,
-        3500, 3500, 3500, 3500, 3500,
+        1900,
+        1900, 1900, 1900, 1900, 1900,
+        3500, 2000, 2000, 2000, 2000,
+        2000, 2000, 2000, 2000, 3800,
+        3800, 3800, 3800, 3800, 3800,
+        3800, 4000, 3900, 3900, 3900,
+        3900, 3900, 3900, 3900, 3900,
+        3900, 3900, 3900, 3900, 3800,
+        3800, 3800, 3800
     ];
 
     const autoMachine = ()=>{
@@ -262,6 +258,8 @@ FrameworkJS.prototype.autoPlay = function () {
             this.doAction();
             const time = machine.shift();
             setTimeout(autoMachine, time);
+        } else if (machine.length === 0) {
+            callback();
         }
     };
 

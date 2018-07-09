@@ -99,6 +99,20 @@ function controllerSetting(framework) {
     nav.classList.remove('hide');
     nav.classList.remove('show-out');
 
+    function close() {
+        if (nav.classList.contains('open')) {
+            nav.classList.remove('open');
+        }
+        if (playing) {
+            nav.classList.remove('center');
+            nav.classList.add('top-right');
+        } else {
+            nav.classList.add('center');
+            nav.classList.remove('top-right');
+        }
+        toggle.innerHTML = toggle_open_text;
+    }
+
     function onToggle () {
         nav.classList.toggle('open');
         if (playing) {
@@ -149,14 +163,22 @@ function controllerSetting(framework) {
 
     toggle.addEventListener('click', onToggle, false);
 
-    // exit
-    document.getElementsByClassName('l1')[0].addEventListener('click', function () {
+
+    function exit () {
 
         playing = false;
         framework.stop();
 
         stopMusic();
-        onToggle();
+        // onToggle();
+        close();
+
+    }
+
+    // exit
+    document.getElementsByClassName('l1')[0].addEventListener('click', function () {
+
+        exit();
 
     });
 
@@ -178,10 +200,12 @@ function controllerSetting(framework) {
     document.getElementsByClassName('l3')[0].addEventListener('click', function () {
 
         playing = true;
-        framework.stop(()=>framework.autoPlay());
+        framework.stop(()=>{
+            replayMusicIfNeed();
+            onToggle();
 
-        replayMusicIfNeed();
-        onToggle();
+            framework.autoPlay(exit)
+        });
 
     });
 
@@ -189,10 +213,11 @@ function controllerSetting(framework) {
     document.getElementsByClassName('l4')[0].addEventListener('click', function () {
 
         playing = true;
-        framework.stop(()=>framework.start());
-
-        replayMusicIfNeed();
-        onToggle();
+        framework.stop(()=>{
+            replayMusicIfNeed();
+            onToggle();
+            framework.start()
+        });
 
     });
 
