@@ -90,6 +90,7 @@ function controllerSetting(framework) {
     const audio_playing = '<div>Music Off</div>';
     const audio_stopped = '<div>Music On</div>';
 
+    let firstPlay = true;
     let playing = false;
     let audioState = false;
 
@@ -115,6 +116,19 @@ function controllerSetting(framework) {
         }
     }
 
+    function onMusic () {
+        audio.classList.toggle('playing');
+        if (audio.classList.contains('playing')) {
+            musicBtn.innerHTML = audio_playing;
+            audio.play();
+        } else {
+            musicBtn.innerHTML = audio_stopped;
+            audio.pause();
+            audio.load();
+        }
+        audioState = !audioState;
+    }
+
     toggle.addEventListener('click', onToggle, false);
 
     // exit
@@ -129,18 +143,7 @@ function controllerSetting(framework) {
 
     // music on or off
     const musicBtn = document.getElementsByClassName('l2')[0];
-    document.getElementsByClassName('l2')[0].addEventListener('click', ()=>{
-        audio.classList.toggle('playing');
-        if (audio.classList.contains('playing')) {
-            musicBtn.innerHTML = audio_playing;
-            audio.play();
-        } else {
-            musicBtn.innerHTML = audio_stopped;
-            audio.pause();
-            audio.load();
-        }
-        audioState = !audioState;
-    });
+    document.getElementsByClassName('l2')[0].addEventListener('click', onMusic);
 
     // auto play
     document.getElementsByClassName('l3')[0].addEventListener('click', function () {
@@ -154,6 +157,12 @@ function controllerSetting(framework) {
 
         playing = true;
         framework.stop(()=>framework.start());
+
+        if (firstPlay) {
+            firstPlay = false;
+            if (!audioState)
+                onMusic();
+        }
 
         onToggle();
 
