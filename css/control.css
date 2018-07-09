@@ -1,0 +1,261 @@
+@font-face {
+    font-family: "Alegreya Sans";
+    src: url("../font/Alegreya Sans2.woff2");
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+nav {
+    display: block;
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    top: 0;
+    right: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+}
+nav.open {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+nav.top-right {
+    top: -140px;
+    right: -140px;
+}
+nav.open.top-right {
+    -webkit-transform: translate(-50px, 50px);
+    transform: translate(-50px, 50px);
+    transition: all 0.5s cubic-bezier(0.3, 1.4, 0.5, 0.9);
+    -webkit-transition: all 0.5s cubic-bezier(0.3, 1.4, 0.5, 0.9);
+
+}
+nav.center {
+    top: 50%;
+    right: 50%;
+    -moz-transform: translate(50%, -50%);
+    -webkit-transform: translate(50%, -50%);
+    transform: translate(50%, -50%);
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+}
+
+.disc {
+    position: absolute;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    font: 25px "Alegreya Sans", sans-serif;
+    font-weight: 800;
+    line-height: 40px;
+    padding-top: 10px;
+    border-radius: 250px;
+    -moz-transform: scale3d(0.5, 0.5, 0.5) rotate3d(0, 0, 1, 190deg);
+    -webkit-transform: scale3d(0.5, 0.5, 0.5) rotate3d(0, 0, 1, 190deg);
+    transform: scale3d(0.5, 0.5, 0.5) rotate3d(0, 0, 1, 190deg);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s, -webkit-transform 0.5s cubic-bezier(0.3, 1.4, 0.5, 0.9);
+    -webkit-transition: opacity 0.5s, -webkit-transform 0.5s cubic-bezier(0.3, 1.4, 0.5, 0.9);
+}
+.disc div {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+.open .disc {
+    pointer-events: auto;
+    opacity: 1;
+}
+
+.l1 {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: tomato;
+    transition-delay: 0s;
+    -webkit-transition-delay: 0s;
+}
+.open .l1 {
+    transition-delay: 0s;
+    -webkit-transform: scale3d(1, 1, 1) rotate3d(0, 0, 1, 190deg);
+    transform: scale3d(1, 1, 1) rotate3d(0, 0, 1, 190deg);
+    opacity: 1;
+}
+.open .l1:hover {
+    background: black;
+    color: tomato;
+    transition-delay: 0s;
+    -webkit-transition-delay: 0s;
+}
+.open .l1:active {
+    background: #424242;
+    color: tomato;
+}
+.open .l1.toggle {
+    -webkit-transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, 10deg);
+    transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, 10deg);
+}
+
+.l2 {
+    top: 50px;
+    left: 50px;
+    right: 50px;
+    bottom: 50px;
+    background: #ff7a39;
+    transition-delay: 0.1s;
+    -webkit-transition-delay: 0.1s;
+}
+.open .l2 {
+    -webkit-transition-delay: 0.1s;
+    transition-delay: 0.1s;
+    -webkit-transform: scale3d(1, 1, 1) rotate3d(0, 0, 1, 190deg);
+    transform: scale3d(1, 1, 1) rotate3d(0, 0, 1, 190deg);
+    opacity: 1;
+}
+.open .l2:hover {
+    background: black;
+    color: #ff7a39;
+    transition-delay: 0s;
+    -webkit-transition-delay: 0s;
+}
+.open .l2:active {
+    background: #424242;
+    color: #ff7a39;
+}
+.open .l2.toggle {
+    -webkit-transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, 10deg);
+    transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, 10deg);
+}
+
+.l3 {
+    top: 100px;
+    left: 100px;
+    right: 100px;
+    bottom: 100px;
+    background: #ff912b;
+    transition-delay: 0.2s;
+    -webkit-transition-delay: 0.2s;
+}
+.open .l3 {
+    -webkit-transition-delay: 0.2s;
+    transition-delay: 0.2s;
+    -webkit-transform: scale3d(1, 1, 1) rotate3d(0, 0, 1, 190deg);
+    transform: scale3d(1, 1, 1) rotate3d(0, 0, 1, 190deg);
+    opacity: 1;
+}
+.open .l3:hover {
+    background: black;
+    color: #ff912b;
+    transition-delay: 0s;
+    -webkit-transition-delay: 0s;
+}
+.open .l3:active {
+    background: #424242;
+    color: #ff912b;
+}
+.open .l3.toggle {
+    -webkit-transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, 10deg);
+    transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, 10deg);
+}
+
+.l4 {
+    top: 150px;
+    left: 150px;
+    right: 150px;
+    bottom: 150px;
+    background: #ffa91c;
+    transition-delay: 0.3s;
+    -webkit-transition-delay: 0.3s;
+}
+.open .l4 {
+    -webkit-transition-delay: 0.3s;
+    transition-delay: 0.3s;
+    -webkit-transform: scale3d(1, 1, 1) rotate3d(0, 0, 1, 190deg);
+    transform: scale3d(1, 1, 1) rotate3d(0, 0, 1, 190deg);
+    opacity: 1;
+}
+.open .l4:hover {
+    background: black;
+    color: #ffa91c;
+    transition-delay: 0s;
+    -webkit-transition-delay: 0s;
+}
+.open .l4:active {
+    background: #424242;
+    color: #ffa91c;
+}
+.open .l4.toggle {
+    -webkit-transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, 10deg);
+    transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, 10deg);
+}
+
+.l5 {
+    top: 200px;
+    left: 200px;
+    right: 200px;
+    bottom: 200px;
+    background: #ffc00e;
+    transition-delay: 0.4s;
+    -webkit-transition-delay: 0.4s;
+}
+.open .l5 {
+    background: #ffc00e;
+    color: black;
+    -webkit-transition-delay: 0.4s;
+    transition-delay: 0.4s;
+    -webkit-transform: scale3d(1, 1, 1) rotate3d(0, 0, 1, 190deg);
+    transform: scale3d(1, 1, 1) rotate3d(0, 0, 1, 190deg);
+    opacity: 1;
+}
+.open .l5:hover {
+    background: black;
+    color: #ffc00e;
+    transition-delay: 0s;
+    -webkit-transition-delay: 0s;
+}
+.open .l5:active {
+    background: #424242;
+    color: #ffc00e;
+}
+.open .l5.toggle {
+    -webkit-transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, 10deg);
+    transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, 10deg);
+}
+
+.toggle {
+    line-height: 100px;
+    padding: 0;
+    width: 100px;
+    background: transparent;
+    color: gold;
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+    pointer-events: auto;
+    transition-delay: 0s;
+    -webkit-transition-delay: 0s;
+}
+.open .toggle {
+    -webkit-transform: rotate3d(0, 0, 1, 0deg);
+    transform: rotate3d(0, 0, 1, 0deg);
+}
+.toggle:hover {
+    background: gold;
+    color: black;
+}
+.toggle:active {
+    background: #424242;
+    color: gold;
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+    transition-duration: 0s;
+    -webkit-transition-duration: 0s;
+}
