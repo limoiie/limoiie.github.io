@@ -596,9 +596,7 @@ FlashPt.prototype = {
         if (this.is_extinct) return;
 
         const ctx = this.canvas.ctx;
-        const rgba = toRgba(this.p.color, this.p.opacity);
-        console.log(rgba);
-        ctx.fillStyle = rgba;
+        ctx.fillStyle = toRgba(this.p.color, this.p.opacity);
         ctx.beginPath();
         ctx.arc(this.p.x, this.p.y, this.p.radius, 0, Math.PI*2, false);
         ctx.closePath();
