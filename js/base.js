@@ -110,7 +110,7 @@ const inRange = (val, start, end) => val > start && val < end;
 const inArray = (elem, array) => array.indexOf(elem) > -1;
 
 function toRgba(color, opacity) {
-    return 'rgba('+color.rgb.r+','+color.rgb.g+','+color.rgb.b+','+opacity+')';
+    return 'rgba('+parseInt(color.rgb.r)+','+parseInt(color.rgb.g)+','+parseInt(color.rgb.b)+','+opacity.toFixed(2)+')';
 }
 
 const randomInt = (value) => Math.floor(Math.random() * value);
