@@ -248,15 +248,20 @@ FrameworkJS.prototype.autoPlay = function () {
     const curr_auto = { cont: true };
     this.last_auto = curr_auto;
 
-    let loopCnt = 51;
+    const machine = [
+        1000,
+        2000, 2000, 2000, 2000, 2000,
+        2000, 2000, 2000, 2000, 2000,
+        2000, 2000, 2000, 2000, 2000,
+        3500, 3500, 3500, 3500, 3500,
+        3500, 3500, 3500, 3500, 3500,
+    ];
+
     const autoMachine = ()=>{
-        if (loopCnt && curr_auto.cont) {
+        if (machine.length && curr_auto.cont) {
             this.doAction();
-            --loopCnt;
-            if (loopCnt < 40)
-                setTimeout(autoMachine, 3000);
-            else
-                setTimeout(autoMachine, 2000);
+            const time = machine.shift();
+            setTimeout(autoMachine, time);
         }
     };
 

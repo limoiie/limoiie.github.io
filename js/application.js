@@ -89,7 +89,7 @@ function controllerSetting(framework) {
     const toggle_close_text = 'Close';
     const audio_playing = '<div>Music Off</div>';
     const audio_stopped = '<div>Music On</div>';
-    
+
     let playing = false;
     let audioState = true;
 
