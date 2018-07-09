@@ -141,6 +141,16 @@ function controllerSetting(framework) {
 
     });
 
+    function playMusicOnFirstPlay () {
+
+        if (firstPlay) {
+            firstPlay = false;
+            if (!audioState)
+                onMusic();
+        }
+
+    }
+
     // music on or off
     const musicBtn = document.getElementsByClassName('l2')[0];
     document.getElementsByClassName('l2')[0].addEventListener('click', onMusic);
@@ -149,6 +159,10 @@ function controllerSetting(framework) {
     document.getElementsByClassName('l3')[0].addEventListener('click', function () {
 
         playing = true;
+        framework.stop(()=>framework.autoPlay());
+
+        playMusicOnFirstPlay();
+        onToggle();
 
     });
 
@@ -158,12 +172,7 @@ function controllerSetting(framework) {
         playing = true;
         framework.stop(()=>framework.start());
 
-        if (firstPlay) {
-            firstPlay = false;
-            if (!audioState)
-                onMusic();
-        }
-
+        playMusicOnFirstPlay();
         onToggle();
 
     });
