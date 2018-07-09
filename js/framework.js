@@ -52,6 +52,7 @@ function FrameworkJS (canvas_el) {
     this.stopped = true;
     this.stopping = false;
 
+    this.last_auto = {};
     this.auto_playing = false;
 
     this.setEventsListeners();
@@ -244,12 +245,18 @@ FrameworkJS.prototype.autoPlay = function () {
     this.auto_playing = true;
     this.stopped = false;
 
-    let loopCnt = 60;
+    const curr_auto = { cont: true };
+    this.last_auto = curr_auto;
+
+    let loopCnt = 51;
     const autoMachine = ()=>{
-        if (loopCnt && this.auto_playing) {
+        if (loopCnt && curr_auto.cont) {
             this.doAction();
             --loopCnt;
-            setTimeout(autoMachine, 3000);
+            if (loopCnt < 40)
+                setTimeout(autoMachine, 3000);
+            else
+                setTimeout(autoMachine, 2000);
         }
     };
 
@@ -269,6 +276,8 @@ FrameworkJS.prototype.start = function () {
 FrameworkJS.prototype.stop = function (stopped_callback) {
 
     const callback = ()=>{
+        this.last_auto.cont = false;
+        this.auto_playing = false;
         this.stopping = false;
         this.stopped = true;
         this.ctx._anim_ind = -1;

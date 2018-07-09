@@ -89,10 +89,9 @@ function controllerSetting(framework) {
     const toggle_close_text = 'Close';
     const audio_playing = '<div>Music Off</div>';
     const audio_stopped = '<div>Music On</div>';
-
-    let firstPlay = true;
+    
     let playing = false;
-    let audioState = false;
+    let audioState = true;
 
     // hide loader and show the menu
     loader.classList.remove('loader');
@@ -120,13 +119,32 @@ function controllerSetting(framework) {
         audio.classList.toggle('playing');
         if (audio.classList.contains('playing')) {
             musicBtn.innerHTML = audio_playing;
-            audio.play();
+            playMusic();
+            audioState = true;
         } else {
             musicBtn.innerHTML = audio_stopped;
-            audio.pause();
-            audio.load();
+            pauseMusic();
+            audioState = false;
         }
-        audioState = !audioState;
+        // audioState = !audioState;
+    }
+
+    function playMusic () {
+        audio.play();
+    }
+
+    function replayMusic() {
+        audio.load();
+        audio.play();
+    }
+
+    function pauseMusic () {
+        audio.pause();
+    }
+
+    function stopMusic () {
+        audio.pause();
+        audio.load();
     }
 
     toggle.addEventListener('click', onToggle, false);
@@ -137,16 +155,17 @@ function controllerSetting(framework) {
         playing = false;
         framework.stop();
 
+        stopMusic();
         onToggle();
 
     });
 
-    function playMusicOnFirstPlay () {
+    function replayMusicIfNeed () {
 
-        if (firstPlay) {
-            firstPlay = false;
-            if (!audioState)
-                onMusic();
+        if (audioState) {
+            replayMusic();
+        } else {
+            stopMusic();
         }
 
     }
@@ -161,7 +180,7 @@ function controllerSetting(framework) {
         playing = true;
         framework.stop(()=>framework.autoPlay());
 
-        playMusicOnFirstPlay();
+        replayMusicIfNeed();
         onToggle();
 
     });
@@ -172,7 +191,7 @@ function controllerSetting(framework) {
         playing = true;
         framework.stop(()=>framework.start());
 
-        playMusicOnFirstPlay();
+        replayMusicIfNeed();
         onToggle();
 
     });
