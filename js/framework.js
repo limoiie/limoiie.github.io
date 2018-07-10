@@ -331,7 +331,8 @@ FrameworkJS.prototype.doAction = function () {
     if (ctx._anim_ind < arr.length) {
         const curr = this.ctx._anim_ind;
         const currAnim = curr < 0 ? null : arr[curr];
-        if (!currAnim || !currAnim.doAction()) {
+        const isLastAction = this.frame_cnt === this.machine.length;
+        if (!currAnim || !currAnim.doAction(isLastAction)) {
             this.transitionAnim(currAnim, curr+1);
         }
     }

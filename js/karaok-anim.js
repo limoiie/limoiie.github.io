@@ -122,7 +122,7 @@ KaraokAnim.prototype.clear = function () {
 
 };
 
-KaraokAnim.prototype.doAction = function () {
+KaraokAnim.prototype.doAction = function (isLastAction) {
 
     const cw = this.ctx.characters.index < 0 ? [] :
         this.ctx.characters.sentences[this.ctx.characters.index];
@@ -136,33 +136,34 @@ KaraokAnim.prototype.doAction = function () {
     const nw = this.ctx.characters.sentences[this.ctx.characters.index];
     this.showText(cw, nw);
 
-    switch (randomInt(12)) {
-        case 0:
-            this.imageParticles('flower');
-            break;
-        case 1:
-            this.imageParticles('cake');
-            break;
-        case 2:
-            this.imageParticles('heart');
-            break;
-        case 3:
-            this.imageParticles('eiffel');
-            break;
-        case 4:
-            this.imageParticles('giftbox');
-            break;
-        case 5:
-            this.circleParticles();
-            break;
-        case 6:
-            this.recycleParticles();
-            break;
-        default:
-            if (Math.random() < 0.3)
-                this.whiteFlashParticles();
-            this.impulseParticles();
-            break;
+    if (isLastAction) {
+        this.recycleParticles();
+    } else {
+        switch (randomInt(12)) {
+            case 0:
+                this.imageParticles('flower');
+                break;
+            case 1:
+                this.imageParticles('cake');
+                break;
+            case 2:
+                this.imageParticles('heart');
+                break;
+            case 3:
+                this.imageParticles('eiffel');
+                break;
+            case 4:
+                this.imageParticles('giftbox');
+                break;
+            case 5:
+                this.circleParticles();
+                break;
+            default:
+                if (Math.random() < 0.3)
+                    this.whiteFlashParticles();
+                this.impulseParticles();
+                break;
+        }
     }
 
     return true;
