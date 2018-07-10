@@ -84,7 +84,14 @@ KaraokAnim.prototype.onhover = function () {
 
 KaraokAnim.prototype.onclick = function () {
 
-    // this.circleParticles();
+    const arr = this.ctx.particles.array;
+    for (const i in arr) {
+        const p = arr[i];
+        if (p.flight_mode !== -1 && p.flight_mode & 1) {
+            this._focusParticle(p);
+            break;
+        }
+    }
 
 };
 
@@ -125,8 +132,6 @@ KaraokAnim.prototype.clear = function () {
 };
 
 KaraokAnim.prototype._focusParticle = function (focused) {
-
-    console.log('last: ', this.ctx.particles.lastFocused, ' curr: ', focused);
 
     const lastFocused = this.ctx.particles.lastFocused;
     this.ctx.particles.lastFocused = focused;
