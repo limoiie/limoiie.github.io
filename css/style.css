@@ -12,7 +12,7 @@ table{border-collapse:collapse;border-spacing:0}
 hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0}
 input,select{vertical-align:middle}
 li{list-style:none}
-.red {color: #ff1744;}.pink {color: #F50057;}.purple {color: #D500F9;}.deep-purple {color: #651FFF;}.indigo {color: #3D5AFE;}.blue {color: #2979FF;}.light-blue {color: #00B0FF;}.cyan {color: #00E5FF;}.teal {color: #1DE9B6;}.green {color: #00E676;}.light-green {color: #76FF03;}.lime {color: #C6FF00;}.yellow {color: #FFEB3B;}.amber{color: #FFC400;}.orange{color: #FF9100;}.deep-orange{color:#FF3D00;}
+/*.red {color: #ff1744;}.pink {color: #F50057;}.purple {color: #D500F9;}.deep-purple {color: #651FFF;}.indigo {color: #3D5AFE;}.blue {color: #2979FF;}.light-blue {color: #00B0FF;}.cyan {color: #00E5FF;}.teal {color: #1DE9B6;}.green {color: #00E676;}.light-green {color: #76FF03;}.lime {color: #C6FF00;}.yellow {color: #FFEB3B;}.amber{color: #FFC400;}.orange{color: #FF9100;}.deep-orange{color:#FF3D00;}*/
 
 @font-face {
     font-family: garamond-premier-pro;
@@ -73,6 +73,8 @@ p {
 .word {
     position: absolute;
     width: 100%;
+    color: white;
+    font-style: italic;
     opacity: 0;
 }
 

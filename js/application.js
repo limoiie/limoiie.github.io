@@ -195,26 +195,26 @@ function controllerSetting(framework) {
     const musicBtn = document.getElementsByClassName('l2')[0];
     document.getElementsByClassName('l2')[0].addEventListener('click', onMusic);
 
-    // auto play
+    // play
     document.getElementsByClassName('l3')[0].addEventListener('click', function () {
 
         playing = true;
         framework.stop(()=>{
             replayMusicIfNeed();
             onToggle();
-            framework.autoPlay(exit);
+            framework.start(exit)
         });
 
     });
 
-    // play
+    // auto play
     document.getElementsByClassName('l4')[0].addEventListener('click', function () {
 
         playing = true;
         framework.stop(()=>{
             replayMusicIfNeed();
             onToggle();
-            framework.start(exit)
+            framework.autoPlay(exit);
         });
 
     });
