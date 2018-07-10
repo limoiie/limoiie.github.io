@@ -170,7 +170,6 @@ function controllerSetting(framework) {
         framework.stop();
 
         stopMusic();
-        // onToggle();
         close();
 
     }
@@ -203,8 +202,7 @@ function controllerSetting(framework) {
         framework.stop(()=>{
             replayMusicIfNeed();
             onToggle();
-
-            framework.autoPlay(exit)
+            framework.autoPlay(exit);
         });
 
     });
@@ -216,7 +214,7 @@ function controllerSetting(framework) {
         framework.stop(()=>{
             replayMusicIfNeed();
             onToggle();
-            framework.start()
+            framework.start(exit)
         });
 
     });

@@ -310,7 +310,6 @@ KaraokAnim.prototype.imageParticles = function (name) {
     this.ctx.ghost = false;
 
     const tmp_canvas = this.ctx.tmp_canvas.canvas;
-
     const size = Math.min(tmp_canvas.w, tmp_canvas.h) * randomRange(0.4, 0.6);
 
     const heartImg = imageFactory.getImage(name || 'eiffel');
@@ -335,8 +334,8 @@ KaraokAnim.prototype.imageParticles = function (name) {
             p.to_p.radius = randomRange(1, 5);
             p.to_p.x = t.x + ox;
             p.to_p.y = t.y + oy;
-            p.p.vx = randomRange(-0.2, 0.2);
-            p.p.vy = randomRange(-0.2, 0.2);
+            p.p.vx = randomRange(-0.1, 0.1);
+            p.p.vy = randomRange(-0.1, 0.1);
             p.to_p.color = toRgb({value: this.cfg.particles.color.pool});
             p.impulse_x = 0;
             p.impulse_y = 0;

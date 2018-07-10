@@ -55,6 +55,19 @@ function FrameworkJS (canvas_el) {
     this.last_auto = {};
     this.auto_playing = false;
 
+    this.machine = [
+        1900,
+        1900, 1900, 1900, 1900, 1900,
+        3500, 2000, 2000, 2000, 2000,
+        2000, 2000, 2000, 2000, 3800,
+        3800, 3800, 3800, 3800, 3800,
+        3800, 4000, 3900, 3900, 3900,
+        3900, 3900, 3900, 3900, 3900,
+        3900, 3900, 3900, 19000
+    ];
+    this.frame_cnt = 0;
+    this.exit_callback = undefined;
+
     this.setEventsListeners();
     this.init();
     this.drawLoop();
@@ -241,33 +254,30 @@ FrameworkJS.prototype.autoPlay = function (callback) {
     const curr_auto = { cont: true };
     this.last_auto = curr_auto;
 
-    const machine = [
-        1900,
-        1900, 1900, 1900, 1900, 1900,
-        3500, 2000, 2000, 2000, 2000,
-        2000, 2000, 2000, 2000, 3800,
-        3800, 3800, 3800, 3800, 3800,
-        3800, 4000, 3900, 3900, 3900,
-        3900, 3900, 3900, 3900, 3900,
-        3900, 3900, 3900, 3900, 3800,
-        3800, 3800, 3800
-    ];
+    this.exit_callback = callback;
+    this.frame_cnt = 0;
 
     const autoMachine = ()=>{
-        if (machine.length && curr_auto.cont) {
+        if (curr_auto.cont) {
             this.doAction();
-            const time = machine.shift();
-            setTimeout(autoMachine, time);
-        } else if (machine.length === 0) {
-            callback();
+            if (this.frame_cnt <= this.machine.length) {
+                const time = this.machine[this.frame_cnt-1];
+                setTimeout(autoMachine, time);
+            }
         }
+        // else if (this.machine.length === 0) {
+            // callback();
+        // }
     };
 
     autoMachine();
 
 };
 
-FrameworkJS.prototype.start = function () {
+FrameworkJS.prototype.start = function (callback) {
+
+    this.frame_cnt = 0;
+    this.exit_callback = callback;
 
     this.auto_playing = false;
     this.stopped = false;
@@ -309,6 +319,12 @@ FrameworkJS.prototype.addAnim = function (anim) {
 FrameworkJS.prototype.doAction = function () {
 
     if (this.stopped || this.stopping) return;
+    if (this.frame_cnt >= this.machine.length) {
+        this.exit_callback && this.exit_callback();
+        return;
+    }
+
+    ++this.frame_cnt;
 
     const ctx = this.ctx;
     const arr = ctx._anim_arr;
