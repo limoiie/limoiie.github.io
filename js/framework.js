@@ -62,8 +62,8 @@ function FrameworkJS (canvas_el) {
         2000, 2000, 2000, 2000, 3800,
         3800, 3800, 3800, 3800, 3800,
         3800, 4000, 3900, 3900, 3900,
-        3900, 3900, 3900, 3900, 3900,
-        3900, 3900, 3900, 19000
+        3900, 3900, 3900, 3900, 3800,
+        3800, 3800, 3800, 19000
     ];
     this.frame_cnt = 0;
     this.exit_callback = undefined;
@@ -189,6 +189,34 @@ FrameworkJS.prototype.setEventsListeners = function () {
         interactivity.mouse.status = 'mouseleave';
 
     });
+
+    interactivity.el.addEventListener('touchmove', (event)=>{
+        event.preventDefault();
+    }, false);
+
+    interactivity.el.addEventListener('touchmove', (event)=>{
+        const touch = event.touches[0];
+
+        interactivity.mouse.x = touch.pageX;
+        interactivity.mouse.y = touch.pageY;
+
+        if (this.ctx._tmp.retina) {
+            interactivity.mouse.x *= this.ctx.canvas.px_ratio;
+            interactivity.mouse.y *= this.ctx.canvas.px_ratio;
+        }
+
+        interactivity.mouse.status = 'mousemove';
+
+    }, false);
+
+    interactivity.el.addEventListener('touched', ()=>{
+
+        interactivity.mouse.x = null;
+        interactivity.mouse.y = null;
+
+        interactivity.mouse.status = 'mouseleave';
+
+    }, false);
 
     //set on_click callback
     interactivity.el.addEventListener('click', () => {
