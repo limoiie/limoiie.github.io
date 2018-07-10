@@ -36,6 +36,8 @@ function KaraokAnim (fw_ctx, params) {
     this.ctx = {
         particles: {
             array: [],
+            focused: null,
+            lastFocused: null
         },
         characters: {
             words: undefined, // element
@@ -122,7 +124,32 @@ KaraokAnim.prototype.clear = function () {
 
 };
 
+KaraokAnim.prototype._focusParticle = function (focused) {
+
+    console.log('last: ', this.ctx.particles.lastFocused, ' curr: ', focused);
+
+    const lastFocused = this.ctx.particles.lastFocused;
+    this.ctx.particles.lastFocused = focused;
+    this.ctx.particles.focused= focused;
+
+    if (lastFocused !== null) {
+        // noinspection JSUndefinedPropertyAssignment
+        lastFocused.flight_mode = 0;
+        lastFocused.to_p.radius = randomRange(1, 4);
+    }
+
+    focused.flight_mode = -1;
+    focused.to_p.radius = 20;
+    focused.to_p.x = this.ctx.canvas.w / 10 - 30;
+    focused.to_p.y = this.ctx.canvas.h / 100 * 18 + 20;
+
+};
+
 KaraokAnim.prototype.doAction = function (isLastAction) {
+
+    if (this.ctx.particles.focused === null) {
+        this._focusParticle(randomPick(this.ctx.particles.array));
+    }
 
     const cw = this.ctx.characters.index < 0 ? [] :
         this.ctx.characters.sentences[this.ctx.characters.index];
@@ -166,6 +193,7 @@ KaraokAnim.prototype.doAction = function (isLastAction) {
         }
     }
 
+    this.ctx.particles.focused = null;  // clear current focused
     return true;
 
 };
@@ -234,7 +262,7 @@ KaraokAnim.prototype.whiteFlashParticles = function () {
     this.ctx.ghost = false;
 
     this.ctx.particles.array.forEach(p=> {
-        if (this.flight_mode !== -1) {
+        if (p.flight_mode !== -1) {
             p.flight_mode = 0;
             const color = p.p.color.rgb;
             color.r = 255;

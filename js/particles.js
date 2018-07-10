@@ -471,8 +471,6 @@ function FlashPt (param, ctx) {
     this.rc_radius = 0;
     this.rc_dv = 0;
     this.rc_d = 0;
-    this.rc_last_x = 0;
-    this.rc_last_y = 0;
 
     this.protect_frame = 0;
 
@@ -493,9 +491,6 @@ FlashPt.prototype = {
     update: function () {
 
         if (this.is_extinct) return;
-
-        this.rc_last_x = this.p.x;
-        this.rc_last_y = this.p.y;
 
         // update current point basic attr which will directly influence the draw
         this.impulse_x += (this.to_impulse_x - this.impulse_x) / 30;   // magic number
@@ -523,7 +518,6 @@ FlashPt.prototype = {
                     this.degree =
                         Math.atan2(this.p.y-my, this.p.x-mx) / Math.PI * 180 + randomRange(-90, 90);
                     this.degreeSpeed = Math.random() + 0.5;  // magic number
-                    this.frame = 0;
                 }
                 this.flight_mode |= 1;
             } else {
@@ -543,7 +537,7 @@ FlashPt.prototype = {
             if (this.p.y < 0) this.p.y = this.to_p.y = this.canvas.h;
             if (this.p.x > this.canvas.w) this.p.x = this.to_p.x = 0;
             if (this.p.y > this.canvas.h) this.p.y = this.to_p.y = 0;
-        } else {
+        } else if (this.flight_mode !== -1) {
             if (this.flight_mode & 2) { // recycle mode
                 this.to_p.x = this.rc_center_x + this.rc_radius * Math.cos(this.rc_d);
                 this.to_p.y = this.rc_center_y + this.rc_radius * Math.sin(this.rc_d);
