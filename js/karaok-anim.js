@@ -454,7 +454,7 @@ KaraokAnim.prototype.pushParticles = function (particles, n) {
     particles = particles || [];
 
     let i = 0;
-    for (; i < particles.length; ++i) {
+    for (; i < particles.length && i < n; ++i) {
         const param = randomFlashPtParam(this.cfg, this.ctx, particles[i]);
         this.ctx.particles.array.push(
             new FlashPt(param, this.ctx)
