@@ -13,7 +13,7 @@ function ShapeShiftAnim (fw_ctx, params) {
                 family: 'Avenir, Helvetica Neue, Helvetica, Arial, sans-serif',
                 size: 320
             },
-            cmd: '霏|Happy|Birthday|And|Best|Wishes|For|Such|Beautiful|Graceful|Girl|Like|You',
+            cmd: 'Hello|Someone|This|Is|Empty|~',
             auto_play: {
                 enable: false,
                 duration: 1400
